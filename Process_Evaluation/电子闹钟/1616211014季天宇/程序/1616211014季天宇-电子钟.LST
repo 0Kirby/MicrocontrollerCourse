@@ -1,0 +1,265 @@
+C51 COMPILER V9.00   1616211014¼¾ÌìÓî_µç×Ó_Ó                                               06/13/2018 16:54:37 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 1616211014¼¾ÌìÓî_µç×Ó_Ó
+OBJECT MODULE PLACED IN 1616211014¼¾ÌìÓî-µç×ÓÖÓ.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE 1616211014¼¾ÌìÓî-µç×ÓÖÓ.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg51.h"
+   2          #include "intrins.h"
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          
+   6          uchar seg[]= {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};
+   7          uchar time[]= {0xf9,0xa4,0xbf,0xb0,0x99,0xbf,0x92,0x82};
+   8          uchar alarm[]= {0xc0,0xc0,0xbf,0xc0,0xc0,0xbf,0xc0,0xc0};
+   9          
+  10          uint i,value,count;
+  11          uint hour=23,minute=59,second=21;
+  12          uint ahour=0,aminute=0,asecond=0;
+  13          uchar m=0x7f;
+  14          
+  15          sbit P2_0=P2^0;
+  16          sbit P2_1=P2^1;
+  17          sbit P2_2=P2^2;
+  18          sbit P2_3=P2^3;
+  19          sbit P2_4=P2^4;
+  20          sbit P2_5=P2^5;
+  21          sbit P2_6=P2^6;
+  22          sbit P2_7=P2^7;
+  23          sbit P3_0=P3^0;
+  24          sbit P3_2=P3^2;
+  25          sbit P3_3=P3^3;
+  26          
+  27          void plus();
+  28          void minus();
+  29          
+  30          void delay(uint x) {
+  31   1              uchar t;
+  32   1              while(x--)
+  33   1                      for(t=0; t<120; t++);
+  34   1      }
+  35          
+  36          void convert() {
+  37   1              time[0]=seg[hour/10];
+  38   1              time[1]=seg[hour%10];
+  39   1              time[3]=seg[minute/10];
+  40   1              time[4]=seg[minute%10];
+  41   1              time[6]=seg[second/10];
+  42   1              time[7]=seg[second%10];
+  43   1              alarm[0]=seg[ahour/10];
+  44   1              alarm[1]=seg[ahour%10];
+  45   1              alarm[3]=seg[aminute/10];
+  46   1              alarm[4]=seg[aminute%10];
+  47   1              alarm[6]=seg[asecond/10];
+  48   1              alarm[7]=seg[asecond%10];
+  49   1      }
+  50          
+  51          void alarmcheck() {
+  52   1              if(hour==ahour&minute==aminute&second==asecond)
+  53   1                      P3_0=1;
+  54   1      }
+  55          
+C51 COMPILER V9.00   1616211014¼¾ÌìÓî_µç×Ó_Ó                                               06/13/2018 16:54:37 PAGE 2   
+
+  56          void plus() {
+  57   1              if (P2_1!=1)
+  58   1                      ++value;
+  59   1              while (P2_1!=1);
+  60   1      }
+  61          
+  62          void minus() {
+  63   1              if (P2_2!=1)
+  64   1                      --value;
+  65   1              while (P2_2!=1);
+  66   1      }
+  67          void flash() {
+  68   1              for(i=0; i<8; i++) {
+  69   2                      P1=m;
+  70   2                      P0=time[i];
+  71   2                      m=_crol_(m,1);
+  72   2                      delay(5);
+  73   2              }
+  74   1      }
+  75          
+  76          void aflash() {
+  77   1              for(i=0; i<8; i++) {
+  78   2                      P1=m;
+  79   2                      P0=alarm[i];
+  80   2                      m=_crol_(m,1);
+  81   2                      delay(5);
+  82   2              }
+  83   1      }
+  84          
+  85          void elipse() {
+  86   1              count++;
+  87   1              if (count==26) {
+  88   2                      count=0;
+  89   2                      second++;
+  90   2              }
+  91   1              if (second>59) {
+  92   2                      second=0;
+  93   2                      minute++;
+  94   2              }
+  95   1              if (minute>59) {
+  96   2                      minute=0;
+  97   2                      hour++;
+  98   2              }
+  99   1              if (hour>23) hour=0;
+ 100   1      }
+ 101          void function() interrupt 0 {
+ 102   1              EA=0;
+ 103   1              EX0=0;
+ 104   1              P2_4=1;
+ 105   1              delay(500);
+ 106   1              i=0;
+ 107   1              m=0x01;
+ 108   1              while(P3_2!=0) {
+ 109   2                      convert();
+ 110   2                      flash();
+ 111   2                      value=second;
+ 112   2                      plus();
+ 113   2                      if(value>59)
+ 114   2                              value=0;
+ 115   2                      minus();
+ 116   2                      if(value<0)
+ 117   2                              value=59;
+C51 COMPILER V9.00   1616211014¼¾ÌìÓî_µç×Ó_Ó                                               06/13/2018 16:54:37 PAGE 3   
+
+ 118   2                      second=value;
+ 119   2              }
+ 120   1              delay(500);
+ 121   1              P2_4=0;
+ 122   1              P2_5=1;
+ 123   1              while(P3_2!=0) {
+ 124   2                      convert();
+ 125   2                      flash();
+ 126   2                      value=minute;
+ 127   2                      plus();
+ 128   2                      if(value>59)
+ 129   2                              value=0;
+ 130   2                      minus();
+ 131   2                      if(value<0)
+ 132   2                              value=59;
+ 133   2                      minute=value;
+ 134   2              }
+ 135   1              delay(500);
+ 136   1              P2_5=0;
+ 137   1              P2_6=1;
+ 138   1              while(P3_2!=0) {
+ 139   2                      convert();
+ 140   2                      flash();
+ 141   2                      value=hour;
+ 142   2                      plus();
+ 143   2                      if(value>23)
+ 144   2                              value=0;
+ 145   2                      minus();
+ 146   2                      if(value<0)
+ 147   2                              value=23;
+ 148   2                      hour=value;
+ 149   2              }
+ 150   1              P2_6=0;
+ 151   1              EX0=1;
+ 152   1      }
+ 153          
+ 154          void alarmset() interrupt 2 {
+ 155   1              P3_0=0;
+ 156   1              EA=0;
+ 157   1              EX1=0;
+ 158   1              P2_4=1;
+ 159   1              P2_7=1;
+ 160   1              delay(500);
+ 161   1              i=0;
+ 162   1              m=0x01;
+ 163   1              while(P3_3!=0) {
+ 164   2                      convert();
+ 165   2                      aflash();
+ 166   2                      value=asecond;
+ 167   2                      plus();
+ 168   2                      if(value>59)
+ 169   2                              value=0;
+ 170   2                      minus();
+ 171   2                      if(value<0)
+ 172   2                              value=59;
+ 173   2                      asecond=value;
+ 174   2              }
+ 175   1              delay(500);
+ 176   1              P2_4=0;
+ 177   1              P2_5=1;
+ 178   1              while(P3_3!=0) {
+ 179   2                      convert();
+C51 COMPILER V9.00   1616211014¼¾ÌìÓî_µç×Ó_Ó                                               06/13/2018 16:54:37 PAGE 4   
+
+ 180   2                      aflash();
+ 181   2                      value=aminute;
+ 182   2                      plus();
+ 183   2                      if(value>59)
+ 184   2                              value=0;
+ 185   2                      minus();
+ 186   2                      if(value<0)
+ 187   2                              value=59;
+ 188   2                      aminute=value;
+ 189   2              }
+ 190   1              delay(500);
+ 191   1              P2_5=0;
+ 192   1              P2_6=1;
+ 193   1              while(P3_3!=0) {
+ 194   2                      convert();
+ 195   2                      aflash();
+ 196   2                      value=ahour;
+ 197   2                      plus();
+ 198   2                      if(value>23)
+ 199   2                              value=0;
+ 200   2                      minus();
+ 201   2                      if(value<0)
+ 202   2                              value=23;
+ 203   2                      ahour=value;
+ 204   2              }
+ 205   1              P2_6=0;
+ 206   1              P2_7=0;
+ 207   1              EX1=1;
+ 208   1      }
+ 209          
+ 210          
+ 211          void main() {
+ 212   1              EA=1;
+ 213   1              EX0=1;
+ 214   1              EX1=1;
+ 215   1              IT0=1;
+ 216   1              IT1=1;
+ 217   1              IP=0;
+ 218   1              P3_0=0;
+ 219   1              P2=0x0f;
+ 220   1              m=0x01;
+ 221   1              TMOD=0x01;
+ 222   1              TH0=(65536-54015)/256;
+ 223   1              TL0=(65536-54015)%256;
+ 224   1              ET0=0;
+ 225   1              TR0=1;
+ 226   1              while(1) {
+ 227   2                      EA=1;
+ 228   2                      convert();
+ 229   2                      elipse();
+ 230   2                      flash();
+ 231   2                      alarmcheck();
+ 232   2              }
+ 233   1      }
+ 234          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1086    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V9.00   1616211014¼¾ÌìÓî_µç×Ó_Ó                                               06/13/2018 16:54:37 PAGE 5   
+
+   DATA SIZE        =     45    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
