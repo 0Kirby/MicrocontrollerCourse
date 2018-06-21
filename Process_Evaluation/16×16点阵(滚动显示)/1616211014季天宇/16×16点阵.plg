@@ -1,0 +1,38 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+D:\下载\0104、16×16点阵(滚动显示)PROTEUS仿真资料\0104、16×16点阵(滚动显示)PROTEUS仿真资料\16×16点阵(滚动显示)\1616211014季天宇\1616211014季天宇.uvproj
+Project File Date:  05/03/2018
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+A51 MACRO ASSEMBLER V8.01 - SN: K1AMC-4UIIQC
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2007
+"E:\Keil\C51\BIN\A51.EXE" "STARTUP.A51" SET (SMALL) DEBUG EP
+A51 FATAL ERROR -
+  FILE:       STARTUP.A51
+  ERROR:      FILE DOES NOT EXIST
+A51 TERMINATED.
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling 1616211014季天宇.C...
+linking...
+Program Size: data=17.0 xdata=0 code=743
+creating hex file from "16×16点阵"...
+"16×16点阵" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling 1616211014季天宇.C...
+linking...
+Program Size: data=17.0 xdata=0 code=743
+creating hex file from "16×16点阵"...
+"16×16点阵" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling 1616211014季天宇.C...
+linking...
+Program Size: data=17.0 xdata=0 code=743
+creating hex file from "16×16点阵"...
+"16×16点阵" - 0 Error(s), 0 Warning(s).
