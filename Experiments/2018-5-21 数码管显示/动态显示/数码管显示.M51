@@ -1,0 +1,157 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/21/2018  16:17:59  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, 数码管显示.obj TO 数码管显示 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  数码管显示.obj (数_牍_显示)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  数码管显示 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0007H     UNIT         ?DT?数_牍_显示
+            DATA    000FH     0003H     UNIT         _DATA_GROUP_
+            IDATA   0012H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     005EH     UNIT         ?PR?MAIN?数_牍_显示
+            CODE    08EAH     0055H     UNIT         ?C?LIB_CODE
+            CODE    093FH     0016H     UNIT         ?PR?_DELAY?数_牍_显示
+            CODE    0955H     000BH     UNIT         ?CO?数_牍_显示
+            CODE    0960H     000AH     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   数码管显示 (?C_STARTUP)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?数_牍_显示
+  +--> ?C_INITSEG
+
+?PR?MAIN?数_牍_显示            000FH    0003H
+  +--> ?CO?数_牍_显示
+  +--> ?PR?_DELAY?数_牍_显示
+
+
+
+SYMBOL TABLE OF MODULE:  数码管显示 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/21/2018  16:17:59  PAGE 2
+
+
+
+  -------         MODULE        ?C_STARTUP
+  C:0800H         SEGMENT       ?C_C51STARTUP
+  I:0012H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0803H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0800H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0800H         LINE#         133
+  C:0802H         LINE#         134
+  C:0803H         LINE#         135
+  C:0804H         LINE#         136
+  C:0806H         LINE#         185
+  C:0809H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        数_牍_显示
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  C:093FH         PUBLIC        _delay
+  C:088CH         PUBLIC        main
+  D:0008H         PUBLIC        Num
+  C:0955H         PUBLIC        DSY_CODE
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        x
+  -------         DO            
+  D:0005H         SYMBOL        t
+  -------         ENDDO         
+  C:093FH         LINE#         7
+  C:093FH         LINE#         8
+  C:093FH         LINE#         10
+  C:0949H         LINE#         11
+  C:0954H         LINE#         12
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  -------         DO            
+  D:000FH         SYMBOL        i
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/21/2018  16:17:59  PAGE 3
+
+
+  D:0003H         SYMBOL        j
+  D:0010H         SYMBOL        k
+  D:0011H         SYMBOL        m
+  -------         ENDDO         
+  C:088CH         LINE#         13
+  C:088CH         LINE#         14
+  C:088CH         LINE#         15
+  C:0892H         LINE#         16
+  C:0892H         LINE#         17
+  C:0892H         LINE#         18
+  C:0895H         LINE#         19
+  C:0895H         LINE#         20
+  C:0897H         LINE#         21
+  C:0897H         LINE#         22
+  C:08B3H         LINE#         23
+  C:08BDH         LINE#         24
+  C:08CAH         LINE#         25
+  C:08CEH         LINE#         26
+  C:08D7H         LINE#         27
+  C:08E8H         LINE#         28
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        数_牍_显示
+
+  -------         MODULE        ?C?UIDIV
+  C:08EAH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0097H BYTE ( 7%) *
+******************************************************************************
+
+Program Size: data=19.0 xdata=0 code=365
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

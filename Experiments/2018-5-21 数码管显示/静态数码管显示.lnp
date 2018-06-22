@@ -1,0 +1,4 @@
+"静态数码管显示.obj",
+"STARTUP.obj" 
+TO "静态数码管显示" 
+RAMSIZE(256) 
