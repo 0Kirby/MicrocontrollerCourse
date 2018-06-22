@@ -1,0 +1,36 @@
+C51 COMPILER V9.00   1616211014ºæÃÏ”Ó                                                      06/11/2018 14:39:35 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 1616211014ºæÃÏ”Ó
+OBJECT MODULE PLACED IN 1616211014ºæÃÏ”Ó.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE 1616211014ºæÃÏ”Ó.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #define uint unsigned int
+   3          #define uchar unsigned char
+   4          sbit P2_4=P2^4;
+   5          sbit P3_6=P3^6;
+   6          
+   7          void main(void){
+   8   1              P2=0xff;
+   9   1              while (P2_4!=1){
+  10   2              P3_6=0;
+  11   2              }
+  12   1              P3_6=1; 
+  13   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     13    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

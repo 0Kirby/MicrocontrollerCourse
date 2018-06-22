@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"led.obj" 
+TO "20180402" 
+RAMSIZE(256) 
