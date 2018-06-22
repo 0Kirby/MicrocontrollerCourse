@@ -1,0 +1,44 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\dell\Documents\µ¥Æ¬»ú\2018-5-19\Àý6-2\Àý6-2.uvproj
+Project File Date:  05/19/2018
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling Àý6-2.c...
+À6-2.C(6): error C141: syntax error near ':'
+À6-2.C(6): error C141: syntax error near ')'
+À6-2.C(15): error C141: syntax error near ':'
+Target not created
+Build target 'Target 1'
+compiling Àý6-2.c...
+À6-2.C(6): error C141: syntax error near ':'
+À6-2.C(6): error C141: syntax error near ')'
+À6-2.C(15): error C141: syntax error near ':'
+Target not created
+Build target 'Target 1'
+compiling Àý6-2.c...
+À6-2.C(15): error C141: syntax error near ':'
+Target not created
+Build target 'Target 1'
+compiling Àý6-2.c...
+linking...
+Program Size: data=18.0 xdata=0 code=354
+creating hex file from "Àý6-2"...
+"Àý6-2" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling Àý6-2.c...
+linking...
+Program Size: data=26.0 xdata=0 code=387
+creating hex file from "Àý6-2"...
+"Àý6-2" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling Àý6-2.c...
+linking...
+Program Size: data=34.0 xdata=0 code=420
+creating hex file from "Àý6-2"...
+"Àý6-2" - 0 Error(s), 0 Warning(s).
